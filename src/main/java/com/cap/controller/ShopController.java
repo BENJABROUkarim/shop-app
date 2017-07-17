@@ -90,4 +90,14 @@ public class ShopController {
 		return mav;
 	}
 
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+	public ModelAndView deleteShop(@PathVariable Integer id, final RedirectAttributes redirectAttributes)
+			throws com.cap.exception.ShopNotFound {
+		ModelAndView modelAndView = new ModelAndView("redirect:/index.html");
+		Shop shop = shopService.delete(id);
+		String message = "The shop " + shop.getName() + " was successfully deleted.";
+		redirectAttributes.addFlashAttribute("message", message);
+		return modelAndView;
+	}
+
 }
